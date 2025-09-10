@@ -3,26 +3,26 @@ dotenv: [.env]
 
 vars:
   PACKAGE_IMPORT_NAME: mlops_course
-  PYTHON_VERSION: 3.11
+  PYTHON_VERSION: 3.12
 
 tasks:
   create-venv:
     desc: Create a virtual environment
     cmds:
-      - uv venv -p {{.PYTHON_VERSION}} .venv
+      - uv venv -p {{.PYTHON_VERSION}} .venv --clear
     silent: false
 
   sync-dev:
     desc: Sync project dependencies with optionals
     cmds:
-      - rm -rf .venv
+      # - python -c "import shutil; shutil.rmtree('.venv', ignore_errors=True)"
       - task: create-venv
       - uv sync --extra dev
 
   sync-test:
     desc: Sync only test dependencies
     cmds:
-        - rm -rf .venv
+        # - rm -rf .venv
         - task: create-venv
         - uv sync --extra test
         # - source .venv/Scripts/activate && uv sync --extra test # Activate and sync
