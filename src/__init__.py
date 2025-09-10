@@ -1,1 +1,1 @@
-"""Fixtures module."""
+"""hotel reservations module."""
