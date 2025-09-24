@@ -39,4 +39,4 @@ cat_features:
   - market_segment_type
 
 
-target: booking_status
+target: booking_status_is_cancelled
