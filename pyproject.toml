@@ -1,5 +1,5 @@
 [project]
-name = "mlops-course"
+name = "hotel-reservation"
 description = "MLOps with Databricks course"
 requires-python = ">=3.12, <3.13"
 dependencies = [
@@ -16,6 +16,7 @@ dependencies = [
     "pydantic==2.11.7",
     "loguru==0.7.3",
     "python-dotenv==1.1.1",
+    "boto3>=1.40.27",
 ]
 
 dynamic = ['version']
@@ -32,6 +33,7 @@ test = ["pre-commit>=4.1.0, <5",
        "pydantic-settings==2.10.1",
        "pyspark>=3.4.0, <4"]
 
+
 [build-system]
 requires = [
   "setuptools>=72.0"]
@@ -40,7 +42,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where =["src"]
-include = ["house_price*", "marvel_characters*"]
+include = ["hotel_reservation*"]
 
 
 [tool.setuptools.dynamic]

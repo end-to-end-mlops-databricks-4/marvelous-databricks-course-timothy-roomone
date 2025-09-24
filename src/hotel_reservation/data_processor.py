@@ -56,6 +56,8 @@ class DataProcessor:
             self.df[cat_col] = self.df[cat_col].astype("category")
 
         self.df.rename(columns={"Booking_ID": "Id"}, inplace=True)
+        self.df["booking_status"] = self.df["booking_status"].replace({"Canceled": 1, "Not_Canceled": 0})
+        self.df.rename(columns={"booking_status": "booking_status_is_cancelled"}, inplace=True)
 
         # Extract target and relevant features
         target = self.config.target
@@ -86,6 +88,10 @@ class DataProcessor:
         test_set_with_timestamp = self.spark.createDataFrame(test_set).withColumn(
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
+
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.train_set;")
+
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.test_set;")
 
         train_set_with_timestamp.write.mode("append").saveAsTable(
             f"{self.config.catalog_name}.{self.config.schema_name}.train_set"
