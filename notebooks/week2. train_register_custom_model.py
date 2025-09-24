@@ -1,14 +1,14 @@
 # Databricks notebook source
+import os
 
 import mlflow
+from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 
+from hotel_reservation import __version__ as hotel_reservation_v
 from hotel_reservation.config import ProjectConfig, Tags
 from hotel_reservation.models.custom_model import CustomModel
 from hotel_reservation.utils import is_databricks
-from dotenv import load_dotenv
-
-from hotel_reservation import __version__ as hotel_reservation_v
 
 # COMMAND ----------
 # Default profile:
@@ -30,8 +30,10 @@ tags = Tags(**{"git_sha": "abcd12345", "branch": "week2"})
 # COMMAND ----------
 # Initialize model with the config path
 custom_model = CustomModel(
-    config=config, tags=tags, spark=spark,
-    code_paths=[f"../dist/hotel_reservation-{hotel_reservation_v}-py3-none-any.whl"]
+    config=config,
+    tags=tags,
+    spark=spark,
+    code_paths=[f"../dist/hotel_reservation-{hotel_reservation_v}-py3-none-any.whl"],
 )
 
 # COMMAND ----------

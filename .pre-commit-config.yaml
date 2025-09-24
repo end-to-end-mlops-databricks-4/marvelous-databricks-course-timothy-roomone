@@ -1,4 +1,4 @@
-exclude: ^tests/resources/
+exclude: ^(tests/resources/|notebooks/(week2. experiment_tracking\.py|week2. log_register_model\.py)$)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0

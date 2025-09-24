@@ -89,13 +89,9 @@ class DataProcessor:
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC")
         )
 
-        self.spark.sql(
-            f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.train_set;"
-        )
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.train_set;")
 
-        self.spark.sql(
-            f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.test_set;"
-        )
+        self.spark.sql(f"DROP TABLE IF EXISTS {self.config.catalog_name}.{self.config.schema_name}.test_set;")
 
         train_set_with_timestamp.write.mode("append").saveAsTable(
             f"{self.config.catalog_name}.{self.config.schema_name}.train_set"

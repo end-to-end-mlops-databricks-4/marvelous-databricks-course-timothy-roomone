@@ -1,14 +1,14 @@
 # Databricks notebook source
 
+import os
+
 import mlflow
+from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 
 from hotel_reservation.config import ProjectConfig, Tags
 from hotel_reservation.models.basic_model import BasicModel
-
-from dotenv import load_dotenv
 from hotel_reservation.utils import is_databricks
-import os
 
 # COMMAND ----------
 # If you have DEFAULT profile and are logged in with DEFAULT profile,
@@ -19,7 +19,6 @@ if not is_databricks():
     profile = os.environ.get("PROFILE", "DEFAULT")
     mlflow.set_tracking_uri(f"databricks://{profile}")
     mlflow.set_registry_uri(f"databricks-uc://{profile}")
-
 
 
 # COMMAND ----------
